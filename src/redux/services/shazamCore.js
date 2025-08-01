@@ -5,7 +5,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 //     method: 'GET',
 //     headers: {
 //         'x-rapidapi-host': '',
-//         'x-rapidapi-key': '3a06ac4e09msh1de38fcbfcc7d43p1bde2djsn548cc3325b35'
+//         'x-rapidapi-key': '90d9191496msh0d0f25ebd8cd782p19ada3jsn6eb63be5bfb3'
 //     }
 // };
 
@@ -14,20 +14,24 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 //     .then(response => console.log(response))
 //     .catch(err => console.error(err));
 
-    export const shazamCoreApi = createApi({
-        reducerPath: 'shazamCoreApi',
-        baseQuery: fetchBaseQuery({
-            baseUrl: 'https://shazam-core.p.rapidapi.com/v1',
-            prepareHeaders: (headers) => {
-                headers.set('x-rapidapi-key', 'fa13cb5930mshe8ad4b5e7cdf121p118ee7jsnb8d4e92bd6fa');
+export const shazamCoreApi = createApi({
+    reducerPath: 'shazamCoreApi',
+    baseQuery: fetchBaseQuery({
+        baseUrl: 'https://shazam-core.p.rapidapi.com/v1',
+        prepareHeaders: (headers) => {
+            headers.set('x-rapidapi-key', '90d9191496msh0d0f25ebd8cd782p19ada3jsn6eb63be5bfb3');
 
-                return headers;
-            },
-        }),
-        endpoints: (builder) => ({
-            getTopCharts: builder.query({ query: () => '/charts/world?country_code=DZ' }),
-        })
+            return headers;
+        },
+    }),
+    endpoints: (builder) => ({
+        getTopCharts: builder.query({ query: () => '/charts/world?country_code=DZ' }),
+        getSongDetails: builder.query({ query: (songid) => `/tracks/details?country_code=DZ?track_id=${songid}` }),
+    })
 
-    });
+});
 
-export const { useGetTopChartsQuery } = shazamCoreApi;
+export const { 
+    useGetTopChartsQuery,
+    useGetSongDetailsQuery,
+} = shazamCoreApi;
